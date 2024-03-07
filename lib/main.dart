@@ -1,6 +1,8 @@
 import 'package:apitask/screen/home_screen.dart';
 import 'package:flutter/material.dart';
 
+import 'screen/auth/signup.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -11,7 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: HomeScreen(),
+      home: SignUp(),
     );
   }
 }
