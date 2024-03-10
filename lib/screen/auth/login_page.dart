@@ -14,6 +14,11 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final TextEditingController emailcon=TextEditingController();
   final TextEditingController passcon=TextEditingController();
+ bool _passwordVisible=false;
+  @override
+  void initState() {
+    _passwordVisible = false;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,14 +42,28 @@ class _LoginPageState extends State<LoginPage> {
                 height: 8,
               ),
               TextFormField(
+               obscureText: !_passwordVisible,
                 controller: passcon,
                 decoration: InputDecoration(
                   hintText: 'password',
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(width: 3, color: Colors.greenAccent),
                   ),
-                ),
-              ),
+                 suffixIcon: IconButton(
+                 icon: Icon(
+                  // Based on passwordVisible state choose the icon
+                 _passwordVisible
+                   ? Icons.visibility
+                   : Icons.visibility_off,
+                  color: Theme.of(context).primaryColorDark,
+                     ),
+                    onPressed: () {
+                      // Update the state i.e. toogle the state of passwordVisible variable
+                      setState(() {
+                        _passwordVisible = !_passwordVisible;
+                      });
+                    }),
+              ),),
 
               SizedBox(height: 50,),
               ElevatedButton(

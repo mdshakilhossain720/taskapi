@@ -2,13 +2,16 @@ import 'dart:convert';
 
 import 'package:http/http.dart';
 
+import '../presentation/controller/controller.dart';
 import 'respon_wrapper.dart';
 
 class NetWorkCaller {
   // get
   static Future<ResponseObject> getRequest(String url) async {
     try {
-      final Response response = await get(Uri.parse(url));
+      final Response response = await get(Uri.parse(url),
+      headers: {'token':AuthUserData.accesstoken??''});
+
       // log(response.statusCode.toString());
       // log(response.body.toString());
       if (response.statusCode == 200) {

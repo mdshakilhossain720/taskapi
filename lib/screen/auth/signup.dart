@@ -1,6 +1,9 @@
 import 'package:apitask/data/NetworkCaller.dart';
+import 'package:apitask/data/model/loginresponse.dart';
+import 'package:apitask/data/model/user_data.dart';
 import 'package:apitask/data/respon_wrapper.dart';
 import 'package:apitask/data/uitily/urls.dart';
+import 'package:apitask/presentation/controller/controller.dart';
 import 'package:flutter/material.dart';
 
 import 'login_page.dart';
@@ -99,6 +102,13 @@ class _SignUpState extends State<SignUp> {
                     final ResponseObject response =
                     await NetWorkCaller.postRequest(Urls.signup, paramer);
                     if (response.isusccess) {
+                      if(!mounted){
+
+                      }
+                      loginresponse login=loginresponse.fromJson(response.responsebody);
+                     await AuthUserData.saveData(loginresponse, userData);
+                      await AuthUserData.savetoken(loginresponse().token!);
+
                       ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(content: Text("Registion siuccess")));
                       Navigator.push(
